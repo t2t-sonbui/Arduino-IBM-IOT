@@ -1,0 +1,33 @@
+Step 1: Create IBM Resource
+	Config node-red
+	->Done install node-red, db and cloud iot
+Step 2: Create device on IBM Watson iot
+	Organization ID:kqoozx
+	Device Type:arduino
+	Device ID:uno_uart
+	Authentication Method:use-token-auth
+	Authentication Token:-Zg6_MjDPztxPyLCHa
+	--------------------------------------
+	Try connect as simulation from local node-red:
+	TRy send demo data
+	->Done
+Step 3: Send data from arduino to IBM via UART Bridge(Node-red)
+	-->Done
+Step 4: Create board monitoring
+	->Done
+Step 5: Monitor data with node-red ui
+	Create app key:
+	API key:a-kqoozx-u1gtzn0dok
+	API Token:CE9F*DNitszj7iFeJd
+	--Add GUI
+	-->Done
+Step 6: Monitor data with node-red ui on IBM server
+	-->Done
+Step 7: Configure Cloudant NoSQL DB as Historian Data Storage
+	-->Done!
+Step 8: Query Cloudant save data by day
+	Link:https://60324d4b-bfc9-4bb1-96fb-5222800698b6-bluemix.cloudant.com/iotp_kqoozx_data_2019-04-17/_design/iotp/_view/by-date
+	Get response by node-red
+	-->Done
+Step 9: Alarm trigger rules
+	-->Done

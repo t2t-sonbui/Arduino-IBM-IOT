@@ -1,0 +1,345 @@
+[
+    {
+        "id": "deb0d57.1c46528",
+        "type": "tab",
+        "label": "Flow 1"
+    },
+    {
+        "id": "36565977.c91e96",
+        "type": "ibmiot in",
+        "z": "deb0d57.1c46528",
+        "authentication": "boundService",
+        "apiKey": "",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": true,
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": true,
+        "qos": 0,
+        "x": 118,
+        "y": 136,
+        "wires": [
+            [
+                "3492d5a4.404aea",
+                "30e0bb94.c03e94"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "1204b553.45e64b",
+        "type": "debug",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 730,
+        "y": 151,
+        "wires": []
+    },
+    {
+        "id": "eb1cfddb.4eb7f",
+        "type": "ui_gauge",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "group": "b0b3ab21.677918",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "ADC Value",
+        "label": "adc",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1024",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 721,
+        "y": 215,
+        "wires": []
+    },
+    {
+        "id": "30e0bb94.c03e94",
+        "type": "function",
+        "z": "deb0d57.1c46528",
+        "name": "Get ADC",
+        "func": "var jsonObject=msg.payload ;\nvar adc=jsonObject.adc;\nvar rtObject={};\nrtObject.payload=adc;\nreturn rtObject;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 367,
+        "y": 143,
+        "wires": [
+            [
+                "eb1cfddb.4eb7f",
+                "1204b553.45e64b",
+                "b7137a2.0ec6f88",
+                "37f6ac19.9e4ba4"
+            ]
+        ]
+    },
+    {
+        "id": "b7137a2.0ec6f88",
+        "type": "ui_chart",
+        "z": "deb0d57.1c46528",
+        "name": "Time line",
+        "group": "b0b3ab21.677918",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Time line",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1024",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 724,
+        "y": 273,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3492d5a4.404aea",
+        "type": "debug",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 122,
+        "y": 220,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "d141d138.4dcd5",
+        "type": "http in",
+        "z": "deb0d57.1c46528",
+        "name": "Query demo",
+        "url": "/data-json",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 187.5,
+        "y": 765,
+        "wires": [
+            [
+                "9c99dffe.079e1"
+            ]
+        ]
+    },
+    {
+        "id": "9c99dffe.079e1",
+        "type": "http request",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "https://60324d4b-bfc9-4bb1-96fb-5222800698b6-bluemix.cloudant.com/iotp_kqoozx_data_2019-04-17/_design/iotp/_view/by-date",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 399.5,
+        "y": 773,
+        "wires": [
+            [
+                "b4fe89e5.863c08",
+                "ed817a2c.d9d3a8"
+            ]
+        ]
+    },
+    {
+        "id": "50674c3c.2e6114",
+        "type": "http response",
+        "z": "deb0d57.1c46528",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 738.5,
+        "y": 799,
+        "wires": []
+    },
+    {
+        "id": "b4fe89e5.863c08",
+        "type": "debug",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 637,
+        "y": 924,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "ed817a2c.d9d3a8",
+        "type": "json",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 562.5,
+        "y": 770,
+        "wires": [
+            [
+                "50674c3c.2e6114"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "37f6ac19.9e4ba4",
+        "type": "function",
+        "z": "deb0d57.1c46528",
+        "name": "Gen Alarm",
+        "func": "var adc=msg.payload;\nvar rtObj={};\nif(adc<50){\n    rtObj.payload=\"Adc value is low!\"\n}\nelse if(adc>900)\n{\n    rtObj.payload=\"Adc value is high!\"\n}\nelse{\n    rtObj.payload=\"Adc value is ok!\"\n    rtObj.reset=true;\n}\nreturn rtObj;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 276,
+        "y": 398,
+        "wires": [
+            [
+                "7b5db2de.c4192c"
+            ]
+        ]
+    },
+    {
+        "id": "c4577828.063438",
+        "type": "ui_audio",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "group": "b0b3ab21.677918",
+        "voice": "en-US",
+        "always": true,
+        "x": 694,
+        "y": 361,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "3591807e.c8ec",
+        "type": "ui_toast",
+        "z": "deb0d57.1c46528",
+        "position": "bottom right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 672,
+        "y": 456,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "7b5db2de.c4192c",
+        "type": "trigger",
+        "z": "deb0d57.1c46528",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-5",
+        "extend": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 472,
+        "y": 406,
+        "wires": [
+            [
+                "c4577828.063438",
+                "3591807e.c8ec",
+                "cff58353.523dd"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "cff58353.523dd",
+        "type": "debug",
+        "z": "deb0d57.1c46528",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 646,
+        "y": 532,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "b0b3ab21.677918",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "59068f3.ae1777",
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "59068f3.ae1777",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
